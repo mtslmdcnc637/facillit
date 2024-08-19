@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicativo de Finanças</title>
+    <!-- Link para FontAwesome (biblioteca de ícones) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         /* Estilos Globais */
         body {
@@ -17,6 +19,7 @@
         .container {
             display: flex;
             flex: 1;
+            flex-direction: row;
         }
         .half {
             flex: 1;
@@ -48,7 +51,7 @@
         .input-row {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* Centralizar verticalmente os itens */
+            align-items: center;
             margin-bottom: 10px;
         }
         .input-row input {
@@ -68,21 +71,23 @@
             text-align: center;
             transition: background-color 0.3s, color 0.3s;
         }
-        /* Modo Escuro */
+
+        /* Modo Escuro Mais Contrastante */
         body.dark-mode {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #0e0e0e; /* Fundo escuro mais contrastante */
+            color: #f5f5f5; /* Texto claro */
         }
         .dark-mode .revenues {
-            background-color: #121212;
+            background-color: #2b2b2b; /* Cor mais escura para o fundo das receitas */
         }
         .dark-mode .expenses {
-            background-color: #121212;
+            background-color: #3b3b3b; /* Cor mais escura para o fundo das despesas */
         }
         .dark-mode .total,
         .dark-mode .result {
-            background-color: rgba(33, 33, 33, 0.8);
+            background-color: rgba(40, 40, 40, 0.8); /* Fundo contrastante para totai e resultado */
         }
+
         /* Cores Específicas */
         .revenue-text {
             color: green;
@@ -93,7 +98,8 @@
         .expense-text {
             color: red;
         }
-        /* Botão Modo Escuro/Claro */
+
+        /* Botões com Ícones */
         .toggle-button {
             position: fixed;
             bottom: 5px;
@@ -126,6 +132,9 @@
             border-radius: 10px;
             color: #fff;
             margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .expense-button {
             background-color: tomato;
@@ -134,6 +143,9 @@
             border-radius: 10px;
             color: #fff;
             margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .delete-button {
             background-color: #ff5252;
@@ -143,33 +155,54 @@
             color: #fff;
             cursor: pointer;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         input {
             border: none;
             background-color: transparent;
         }
         .dark-mode #revenuesInputs input {
-            color: tomato;
+            color: #76ff03;
         }
         .dark-mode .expenses input {
-            color: #76ff03;
+            color: tomato;
+        }
+
+        /* Melhorando a Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .toggle-button {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .half {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-<button class="toggle-button" onclick="toggleDarkMode()" id="toggle">Modo Escuro</button>
+<button class="toggle-button" onclick="toggleDarkMode()" id="toggle"><i class="fas fa-adjust"></i> Modo Escuro</button>
 
 <div class="container">
     <div class="half revenues">
         <div class="total revenue-text" id="totalRevenues">Total Receitas: R$0.00</div>
         <div id="revenuesInputs"></div>
-        <button onclick="addRevenue()" class="revenue-button">Adicionar Receita</button>
+        <button onclick="addRevenue()" class="revenue-button"><i class="fas fa-plus"></i> Adicionar Receita</button>
     </div>
     <div class="half expenses">
         <div class="total expense-text" id="totalExpenses">Total Despesas: R$0.00</div>
         <div id="expensesInputs"></div>
-        <button onclick="addExpense()" class="expense-button">Adicionar Despesa</button>
+        <button onclick="addExpense()" class="expense-button"><i class="fas fa-plus"></i> Adicionar Despesa</button>
     </div>
 </div>
 
@@ -190,7 +223,7 @@
         const index = revenues.length;
         inputRow.innerHTML = `<input type="text" value="${name}" placeholder="Nome da Receita">
                               <input type="number" value="${value}" oninput="updateRevenues()" placeholder="R$">
-                              <button class="delete-button" onclick="removeRevenue(${index})">Remover</button>`;
+                              <button class="delete-button" onclick="removeRevenue(${index})"><i class="fas fa-trash"></i></button>`;
         document.getElementById('revenuesInputs').appendChild(inputRow);
         updateRevenues();
     }
@@ -201,7 +234,7 @@
         const index = expenses.length;
         inputRow.innerHTML = `<input type="text" value="${name}" placeholder="Nome da Despesa">
                               <input type="number" value="${value}" oninput="updateExpenses()" placeholder="R$">
-                              <button class="delete-button" onclick="removeExpense(${index})">Remover</button>`;
+                              <button class="delete-button" onclick="removeExpense(${index})"><i class="fas fa-trash"></i></button>`;
         document.getElementById('expensesInputs').appendChild(inputRow);
         updateExpenses();
     }
@@ -229,7 +262,7 @@
             inputRow.className = 'input-row';
             inputRow.innerHTML = `<input type="text" value="${revenue.name}" placeholder="Nome da Receita">
                                   <input type="number" value="${revenue.value}" oninput="updateRevenues()" placeholder="R$">
-                                  <button class="delete-button" onclick="removeRevenue(${index})">Remover</button>`;
+                                  <button class="delete-button" onclick="removeRevenue(${index})"><i class="fas fa-trash"></i></button>`;
             revenuesContainer.appendChild(inputRow);
         });
     }
@@ -243,7 +276,7 @@
             inputRow.className = 'input-row';
             inputRow.innerHTML = `<input type="text" value="${expense.name}" placeholder="Nome da Despesa">
                                   <input type="number" value="${expense.value}" oninput="updateExpenses()" placeholder="R$">
-                                  <button class="delete-button" onclick="removeExpense(${index})">Remover</button>`;
+                                  <button class="delete-button" onclick="removeExpense(${index})"><i class="fas fa-trash"></i></button>`;
             expensesContainer.appendChild(inputRow);
         });
     }
