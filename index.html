@@ -6,34 +6,39 @@
     <title>Aplicativo de Finanças</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Link para FontAwesome (biblioteca de ícones) -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
-    
 </head>
 <body>
 
 <!-- Notificação -->
 <div id="notification" class="notification"></div>
 
+<!-- Botão para alternar entre modo escuro/claro -->
 <button class="toggle-button" onclick="toggleDarkMode()" id="toggle"><i class="fas fa-adjust"></i> Modo Escuro</button>
 
+<!-- Botão para abrir o Resumo Mensal -->
+<button class="summary-button" onclick="toggleSummary()"><i class="fas fa-chart-pie"></i></button>
+
+<!-- Container principal para Receitas e Despesas -->
 <div class="container">
+    <!-- Seção de Receitas -->
     <div class="half revenues">
         <div class="total revenue-text" id="totalRevenues">Total Receitas: R$0.00</div>
-        <div id="revenuesInputs"></div>
+        <div id="revenuesInputs"></div> <!-- ID para as receitas -->
         <button onclick="addRevenue()" class="revenue-button"><i class="fas fa-plus"></i> Adicionar Receita</button>
     </div>
+
+    <!-- Seção de Despesas -->
     <div class="half expenses">
-        <div class="total expense-text" id="totalExpenses">Total Despesas: R$0.00</div>
-        <div id="expensesInputs"></div>
+        <div class="total expense-text" id="totalDespesas">Total Despesas: R$0.00</div>
+        <div id="expensesInputs"></div> <!-- ID para as despesas -->
         <button onclick="addExpense()" class="expense-button"><i class="fas fa-plus"></i> Adicionar Despesa</button>
     </div>
 </div>
 
+
+<!-- Resultado Final -->
 <div class="result" id="finalResult">Resultado: R$0.00</div>
-<!-- Botão para abrir o Resumo Mensal -->
-<button class="summary-button" onclick="toggleSummary()"><i class="fas fa-chart-pie"></i></button>
 
 <!-- Caixa flutuante para Resumo Mensal -->
 <div id="summaryModal" class="modal">
@@ -54,8 +59,8 @@
 <!-- Incluir Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Incluir Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Inclua o JavaScript aqui -->
+<script src="index.js"></script>
 
 </body>
 </html>
