@@ -205,3 +205,86 @@ input {
         width: auto;
     }
 }
+/* Botão Resumo Mensal */
+.summary-button {
+    position: fixed;
+    bottom: 5px;
+    right: 125px; /* Ajustar conforme a posição do botão de modo escuro/claro */
+    padding: 10px;
+    background-color: #ff9800;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+.dark-mode .summary-button {
+    background-color: #ffb74d;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo esmaecido */
+    padding-top: 60px;
+}
+/* Estilo para o modal */
+.modal-content {
+    background-color: #2b2b2b;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #444;
+    width: 80%;
+    max-width: 600px; /* Aumentamos um pouco a largura máxima */
+    border-radius: 10px;
+    color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.summary-chart {
+    flex: 1;
+    max-width: 50%; /* Ajuste de largura para o gráfico */
+}
+
+.summary-chart canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.summary-text {
+    flex: 1;
+    max-width: 50%; /* Ajuste de largura para o texto */
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+    }
+
+    .summary-container {
+        flex-direction: column;
+    }
+
+    .summary-chart,
+    .summary-text {
+        max-width: 100%;
+    }
+}

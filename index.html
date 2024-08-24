@@ -32,6 +32,30 @@
 </div>
 
 <div class="result" id="finalResult">Resultado: R$0.00</div>
+<!-- Botão para abrir o Resumo Mensal -->
+<button class="summary-button" onclick="toggleSummary()"><i class="fas fa-chart-pie"></i></button>
+
+<!-- Caixa flutuante para Resumo Mensal -->
+<div id="summaryModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="toggleSummary()">&times;</span>
+        <h2>Resumo Mensal</h2>
+        <div class="summary-container">
+            <div class="summary-chart">
+                <canvas id="summaryChart"></canvas>
+            </div>
+            <div class="summary-text" id="summaryContent">
+                <!-- O conteúdo do resumo será inserido aqui via JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Incluir Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Incluir Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 </html>

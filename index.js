@@ -220,4 +220,77 @@ let revenues = [];
             expensesContainer.appendChild(inputRow);
         });
     }
+    let summaryChart;  // Variável para armazenar o gráfico
+
+    function toggleSummary() {
+        const modal = document.getElementById('summaryModal');
+        modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        if (modal.style.display === 'block') {
+            displaySummary();
+        }
+    }
     
+    function displaySummary() {
+        const totalRevenues = revenues.reduce((acc, curr) => acc + curr.value, 0);
+        const totalExpenses = expenses.reduce((acc, curr) => acc + curr.value, 0);
+        const balance = totalRevenues - totalExpenses;
+    
+        const ctx = document.getElementById('summaryChart').getContext('2d');
+    
+        if (summaryChart) {
+            // Se o gráfico já existe, atualize os dados
+            summaryChart.data.datasets[0].data = [totalRevenues, totalExpenses, balance];
+            summaryChart.update();
+        } else {
+            // Se o gráfico não existe, crie-o
+            summaryChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Receitas', 'Despesas', 'Saldo'],
+                    datasets: [{
+                        label: 'Resumo Mensal',
+                        data: [totalRevenues, totalExpenses, balance],
+                        backgroundColor: [
+                            '#76ff03',
+                            'tomato',
+                            '#007bff'
+                        ],
+                        hoverBackgroundColor: [
+                            '#aeea00',
+                            '#ff6347',
+                            '#0056b3'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#f5f5f5'  // Texto do gráfico no padrão claro
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    
+        const summaryContent = `
+            <strong>Total Receitas:</strong> R$${totalRevenues.toFixed(2)}<br>
+            <strong>Total Despesas:</strong> R$${totalExpenses.toFixed(2)}<br>
+            <strong>Saldo:</strong> R$${balance.toFixed(2)}<br>
+        `;
+    
+        document.getElementById('summaryContent').innerHTML = summaryContent;
+    }
+    
+    // Fechar o modal ao clicar fora dele
+    window.onclick = function(event) {
+        const modal = document.getElementById('summaryModal');
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+        
